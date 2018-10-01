@@ -8,23 +8,24 @@ import { connect } from 'react-redux'
 
 class SignInScreen extends Component {
 
-    state = {
-        text: "hello", 
-        userName: "Kieran123",
-        email: "asd@asd.com",
-    }
 
-    changeToJordan = () => {
 
-    }
+    // state = {
+    //     text: "hello", 
+    //     userName: "Kieran123",
+    //     email: "asd@asd.com",
+    // }
+
+    // changeToJordan = () => {
+    //     this.props.dispatch({ type: 'JORDAN', text})
+    // }
 
     render() {
-        const { text } = this.state
         return (
             <Container style={styles.container}>
                 <Content>
-                    <Text>{text}</Text>
-                    <Button onPress={() => this.changeToJordan()}>
+                    <Text>{this.props.user}</Text>
+                    <Button onPress={() => this.props.increaseCounter()}>
                         <Text>Press me!</Text>
                     </Button>
                 </Content>
@@ -32,7 +33,16 @@ class SignInScreen extends Component {
         );
     }
 }
-export default connect()(SignInScreen);
+
+const mapStateToProps = state => ({
+    user: state.user
+})
+
+const mapDispatchToProps = dispatch => ({
+    increaseCounter: () => dispatch({type: 'INCREASE_COUNTER'})
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignInScreen);
 
 const styles = StyleSheet.create({
     container: {

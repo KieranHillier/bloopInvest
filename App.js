@@ -1,25 +1,12 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
-
 import React, {Component} from 'react';
 import {Platform, StyleSheet, View} from 'react-native';
 import firebase from 'react-native-firebase';
-import { Container, Content, Button, Text } from 'native-base';
 import SignInScreen from './src/screens/SignInScreen'
-import store from './src/store'
 import { Provider } from 'react-redux'
+import store from './src/store'
 
 type Props = {};
 export default class App extends Component<Props> {
-
-  state = {
-    isLoading: false
-  }
 
   constructor() {
     super() 
@@ -27,10 +14,14 @@ export default class App extends Component<Props> {
   }
 
   componentDidMount() {
-    this.ref.add({
-      name: "jordan",
-      lastName: "cheung"
-    });
+      this.ref.add({
+          name: "jordan",
+          lastName: "cheung"
+      });
+  }
+
+  state = {
+    isLoading: false
   }
 
   render() {
