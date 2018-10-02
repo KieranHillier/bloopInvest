@@ -28,20 +28,14 @@ export default class App extends Component<Props> {
     const { isLoading } = this.state
     return (
       <Provider store={store}>
-        <View style={styles.container}>
+        
           {isLoading ? ( 
             <Text>Loading...</Text>
           ) : (
             <SignInScreen />
           )}
-        </View>
+        
       </Provider>  
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});

@@ -1,35 +1,46 @@
 import React, { Component } from "react";
 import { 
     View,
-    StyleSheet
+    StyleSheet,
+    Text,
+    Button,
+    TextInput,
+    TouchableOpacity,
+    ScrollView,
+    KeyboardAvoidingView,
+    Dimensions
 } from "react-native";
-import { Container, Content, Button, Text } from 'native-base'
+import { Container, Content, Form, Item, Input } from 'native-base'
 import { connect } from 'react-redux'
 
 class SignInScreen extends Component {
 
-
-
-    // state = {
-    //     text: "hello", 
-    //     userName: "Kieran123",
-    //     email: "asd@asd.com",
-    // }
-
-    // changeToJordan = () => {
-    //     this.props.dispatch({ type: 'JORDAN', text})
-    // }
-
     render() {
         return (
-            <Container style={styles.container}>
-                <Content>
-                    <Text>{this.props.user}</Text>
-                    <Button onPress={() => this.props.increaseCounter()}>
-                        <Text>Press me!</Text>
-                    </Button>
-                </Content>
-            </Container>
+          <ScrollView>
+            <View style={styles.container}>
+                <View style={styles.header}>
+                    <Text style={styles.title}>AQUIRE.</Text>
+                    <Text style={styles.title}>{this.props.user}</Text>
+                </View>
+                <View style={styles.body}>
+                    <View style={styles.bodyForeground}>
+                        <View style={styles.topBodyContainer}>
+                            <Text style={styles.topBodyText}>Sign in with:</Text>
+                        </View>
+                        <TextInput style={styles.textInput} placeholder="Username" placeholderTextColor='#080C2E' />   
+                        <TextInput style={styles.textInput} placeholder="Password" placeholderTextColor='#080C2E' /> 
+                        <TouchableOpacity style={styles.button}>
+                            <Text style={styles.btnText}>Sign In</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.footer} onPress={() => this.props.increaseCounter()}>
+                            <Text style={styles.footerText}>Don't have an account? <Text style={styles.footerTextAction}>Sign up!</Text></Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </View>
+          </ScrollView>
+          
         );
     }
 }
@@ -46,9 +57,70 @@ export default connect(mapStateToProps, mapDispatchToProps)(SignInScreen);
 
 const styles = StyleSheet.create({
     container: {
-        paddingTop: 50,
-        flex: 1,
+        height: Dimensions.get('window').height,
+        backgroundColor: 'grey'
+    },
+    header: {
+        // flex: 5,
+        //375
+        height: Dimensions.get('window').height * 0.6 ,
+        backgroundColor: '#F6EF1C',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    title: {
+        fontSize: 35,
+        color: '#080C2E'
+    },
+    body: {
+        // flex: 4,
+        //300
+        height: Dimensions.get('window').height * 0.4,
+        backgroundColor: 'white',
+        justifyContent: 'center',
+    },
+    bodyForeground: {
+        paddingHorizontal: 30
+    },
+    topBodyContainer: {
         alignItems: 'center',
-        justifyContent: 'center'
+        marginBottom: 12
+    },
+    topBodyText: {
+        color: '#080C2E'
+    },
+    textInput: {
+        borderColor: '#080C2E',
+        borderWidth: 1,
+        borderRadius: 6,
+        marginTop: 5,
+        color: 'white',
+        paddingLeft: 18,
+        height: 45,
+    },
+    button: {
+        marginTop: 20,
+        alignItems: 'center',
+        backgroundColor: '#080C2E',
+        borderRadius: 6,
+        padding: 12,
+        height: 45
+    },
+    btnText: {
+        color: 'white'
+    },
+    footer: {
+        marginTop: 20,
+        alignItems: 'center',
+        borderTopWidth: 1,
+        padding: 12,
+        height: 45
+    },
+    footerText: {
+        color: '#080C2E'
+    },
+    footerTextAction: {
+        fontWeight: 'bold',
+        textDecorationLine: 'underline'
     }
 });

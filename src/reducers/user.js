@@ -1,4 +1,4 @@
-const user = (state = "say", action) => {
+const user = (state = "plschange", action) => {
     switch(action.type) {
         case 'INCREASE_COUNTER':
             return "meme" 
