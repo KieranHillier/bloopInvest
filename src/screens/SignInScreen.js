@@ -17,7 +17,7 @@ class SignInScreen extends Component {
 
     render() {
         return (
-          <ScrollView>
+          <ScrollView style={styles.scrollView} contentContainerStyle={{flex: 1}}>
             <View style={styles.container}>
                 <View style={styles.header}>
                     <Text style={styles.title}>AQUIRE.</Text>
@@ -30,10 +30,10 @@ class SignInScreen extends Component {
                         </View>
                         <TextInput style={styles.textInput} placeholder="Username" placeholderTextColor='#080C2E' />   
                         <TextInput style={styles.textInput} placeholder="Password" placeholderTextColor='#080C2E' /> 
-                        <TouchableOpacity style={styles.button}>
+                        <TouchableOpacity style={styles.button} onPress={() => this.props.increaseCounter()}>
                             <Text style={styles.btnText}>Sign In</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.footer} onPress={() => this.props.increaseCounter()}>
+                        <TouchableOpacity style={styles.footer} onPress={() => this.props.navigation.navigate('SignUp')}>
                             <Text style={styles.footerText}>Don't have an account? <Text style={styles.footerTextAction}>Sign up!</Text></Text>
                         </TouchableOpacity>
                     </View>
@@ -56,14 +56,19 @@ const mapDispatchToProps = dispatch => ({
 export default connect(mapStateToProps, mapDispatchToProps)(SignInScreen);
 
 const styles = StyleSheet.create({
+    scrollView: {
+        //pretty sure i dont need this
+        flex: 1,
+    },
     container: {
-        height: Dimensions.get('window').height,
-        backgroundColor: 'grey'
+        // height: Dimensions.get('window').height,
+        backgroundColor: 'grey',
+        height: '100%'
     },
     header: {
         // flex: 5,
         //375
-        height: Dimensions.get('window').height * 0.6 ,
+        height:'50%' ,
         backgroundColor: '#F6EF1C',
         justifyContent: 'center',
         alignItems: 'center'
@@ -75,7 +80,7 @@ const styles = StyleSheet.create({
     body: {
         // flex: 4,
         //300
-        height: Dimensions.get('window').height * 0.4,
+        height: '50%',
         backgroundColor: 'white',
         justifyContent: 'center',
     },
@@ -87,14 +92,15 @@ const styles = StyleSheet.create({
         marginBottom: 12
     },
     topBodyText: {
-        color: '#080C2E'
+        color: '#080C2E',
+        marginTop: 25
     },
     textInput: {
         borderColor: '#080C2E',
         borderWidth: 1,
         borderRadius: 6,
         marginTop: 5,
-        color: 'white',
+        color: '#080C2E',
         paddingLeft: 18,
         height: 45,
     },

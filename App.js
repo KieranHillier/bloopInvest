@@ -4,6 +4,7 @@ import firebase from 'react-native-firebase';
 import SignInScreen from './src/screens/SignInScreen'
 import { Provider } from 'react-redux'
 import store from './src/store'
+import DrawerNav from './src/navigation/app.navigation'
 
 type Props = {};
 export default class App extends Component<Props> {
@@ -24,17 +25,16 @@ export default class App extends Component<Props> {
     isLoading: false
   }
 
+  // {isLoading ? ( 
+  //   <Text>Loading...</Text>
+  // ) : (
+  //   <SignInScreen />
+  // )}
   render() {
     const { isLoading } = this.state
     return (
       <Provider store={store}>
-        
-          {isLoading ? ( 
-            <Text>Loading...</Text>
-          ) : (
-            <SignInScreen />
-          )}
-        
+        <DrawerNav/>
       </Provider>  
     );
   }
