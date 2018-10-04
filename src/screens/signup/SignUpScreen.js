@@ -10,8 +10,52 @@ import {
     KeyboardAvoidingView,
     Dimensions
 } from "react-native";
+import firebase from 'react-native-firebase';
+
 
 class SignUpScreen extends Component {
+
+    constructor() {
+        super()
+        this.ref = firebase.auth()
+        this.db = firebase.firestore()
+        this.email = 'test7@teat.com'
+        this.fullName = 'bob hillier'
+        this.userName = 'koolkid7'
+        this.password = 'asdasd'
+    }
+
+    signUpUser = () => {
+        let email = "meme@test.com"
+        let password = "megameme"
+        this.ref.createUserAndRetrieveDataWithEmailAndPassword(this.email, this.password)
+            .then((user) => {
+                console.log(user.user._user)
+                let newUID = user.user._user.uid
+                this.db.collection('users').doc(newUID).set({
+                    name: this.fullName,
+                    username: this.userName,
+                    email: this.email,
+                    activity: {
+                        test: "test"
+                    }
+                })
+
+                this.db.collection('userList').doc(this.userName).set({
+                    uid: newUID
+                })
+            })
+            .then(() => {
+                //navigate to home 
+            })
+            .catch((error) => {alert(error)})
+    }
+
+    EmailChange = (email) => this.email = email;
+    FullNameChange = (fullName) => this.fullName = fullName;
+    UserNameChange = (userName) => this.userName = userName;
+    PasswordChange = (password) => this.password = password;
+
     render() {
         return (
             <ScrollView style={styles.scroll} contentContainerStyle={{flex: 1}}>
@@ -24,12 +68,12 @@ class SignUpScreen extends Component {
                           <View style={styles.topBodyContainer}>
                               <Text style={styles.topBodyText}>Sign up with:</Text>
                           </View>
-                          <TextInput style={styles.textInput} placeholder="Username" placeholderTextColor='#080C2E' />   
-                          <TextInput style={styles.textInput} placeholder="Name" placeholderTextColor='#080C2E' /> 
-                          <TextInput style={styles.textInput} placeholder="Email" placeholderTextColor='#080C2E' /> 
-                          <TextInput style={styles.textInput} placeholder="Password" placeholderTextColor='#080C2E' /> 
-                          <TouchableOpacity style={styles.button} onPress={() => this.props.increaseCounter()}>
-                              <Text style={styles.btnText}>Sign In</Text>
+                          <TextInput style={styles.textInput} placeholder="Username" placeholderTextColor='#080C2E' onChangeText={this.UserNameChange}/>   
+                          <TextInput style={styles.textInput} placeholder="Name" placeholderTextColor='#080C2E' onChangeText={this.FullNameChange}/> 
+                          <TextInput style={styles.textInput} placeholder="Email" placeholderTextColor='#080C2E' onChangeText={this.EmailChange}/> 
+                          <TextInput style={styles.textInput} placeholder="Password" placeholderTextColor='#080C2E' onChangeText={this.PasswordChange}/> 
+                          <TouchableOpacity style={styles.button} onPress={this.signUpUser}>
+                              <Text style={styles.btnText}>Sign Up</Text>
                           </TouchableOpacity>
                           <TouchableOpacity style={styles.footer} onPress={() => this.props.navigation.navigate('SignIn')}>
                               <Text style={styles.footerText}>Already have an account? <Text style={styles.footerTextAction}>Sign in!</Text></Text>

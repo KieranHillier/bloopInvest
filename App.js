@@ -11,14 +11,14 @@ export default class App extends Component<Props> {
 
   constructor() {
     super() 
-    this.ref = firebase.firestore().collection('users');
+    // this.ref = firebase.firestore().collection('users');
   }
 
   componentDidMount() {
-      this.ref.add({
-          name: "jordan",
-          lastName: "cheung"
-      });
+      // this.ref.add({
+      //     name: "jordan",
+      //     lastName: "cheung"
+      // });
   }
 
   state = {
