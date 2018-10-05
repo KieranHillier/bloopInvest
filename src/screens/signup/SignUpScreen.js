@@ -8,9 +8,11 @@ import {
     TouchableOpacity,
     ScrollView,
     KeyboardAvoidingView,
-    Dimensions
-} from "react-native";
-import firebase from 'react-native-firebase';
+    Dimensions,
+} from "react-native"
+import firebase from 'react-native-firebase'
+import { connect } from 'react-redux'
+import { changeName } from '../../actions'
 
 
 class SignUpScreen extends Component {
@@ -56,15 +58,16 @@ class SignUpScreen extends Component {
     UserNameChange = (userName) => this.userName = userName;
     PasswordChange = (password) => this.password = password;
 
+    changeTheName = () => {
+        this.props.dispatch(changeName())
+    }
+
     render() {
         return (
-            <ScrollView style={styles.scroll} contentContainerStyle={{flex: 1}}>
-              <View style={styles.container}>
-                  <View style={styles.header}>
-                      <Text style={styles.title}>AQUIRE.</Text>
-                  </View>
-                  <View style={styles.body}>
+            <ScrollView style={styles.scroll} contentContainerStyle={{flex: 1}}>     
+                  <View style={styles.body}>          
                       <View style={styles.bodyForeground}>
+                          <Text style={styles.title}>{this.props.userID}</Text>
                           <View style={styles.topBodyContainer}>
                               <Text style={styles.topBodyText}>Sign up with:</Text>
                           </View>
@@ -75,50 +78,50 @@ class SignUpScreen extends Component {
                           <TouchableOpacity style={styles.button} onPress={this.signUpUser}>
                               <Text style={styles.btnText}>Sign Up</Text>
                           </TouchableOpacity>
+                          <TouchableOpacity style={styles.button} onPress={() => this.changeTheName()}>
+                              <Text style={styles.btnText}>{this.props.user}</Text>
+                          </TouchableOpacity>
                           <TouchableOpacity style={styles.footer} onPress={() => this.props.navigation.navigate('SignIn')}>
                               <Text style={styles.footerText}>Already have an account? <Text style={styles.footerTextAction}>Sign in!</Text></Text>
                           </TouchableOpacity>
                       </View>
                   </View>
-              </View>
             </ScrollView>
             
           );
     }
 }
-export default SignUpScreen;
+
+const mapStateToProps = state => ({
+    userID: state.userID,
+    user: state.user
+})
+
+// const mapDispatchToProps = dispatch => ({
+//     changeName: () => dispatch(changeName())
+// })
+
+export default connect(mapStateToProps)(SignUpScreen);
 
 const styles = StyleSheet.create({
     scroll: {
         flex:1,
-        backgroundColor: 'black'
-    },
-    container: {
-        // height: Dimensions.get('window').height,
         backgroundColor: 'black',
-        height: '100%'
-    },
-    header: {
-        // flex: 5,
-        //375
-        height: '30%',
-        backgroundColor: '#F6EF1C',
-        justifyContent: 'center',
-        alignItems: 'center'
     },
     title: {
-        fontSize: 35,
-        color: '#080C2E'
+        fontSize: 65,
+        color: '#080C2E',
+        textAlign: 'center'
     },
     body: {
-        // flex: 4,
+        flex: 1,
         //300
-        height: '70%',
+        // height: '70%',
         backgroundColor: 'white',
         justifyContent: 'center',
     },
     bodyForeground: {
-        paddingHorizontal: 30
+        paddingHorizontal: 30,
     },
     topBodyContainer: {
         alignItems: 'center',

@@ -9,22 +9,20 @@ import {
     ScrollView,
     KeyboardAvoidingView,
     Dimensions
-} from "react-native";
+} from "react-native"
 import { Container, Content, Form, Item, Input } from 'native-base'
 import { connect } from 'react-redux'
+import { increaseCounter } from '../actions'
 
 class SignInScreen extends Component {
 
     render() {
         return (
           <ScrollView style={styles.scrollView} contentContainerStyle={{flex: 1}}>
-            <View style={styles.container}>
-                <View style={styles.header}>
-                    <Text style={styles.title}>AQUIRE.</Text>
-                    <Text style={styles.title}>{this.props.user}</Text>
-                </View>
                 <View style={styles.body}>
                     <View style={styles.bodyForeground}>
+                        <Text style={styles.title}>AQUIRE.</Text>
+                        <Text style={styles.title}>{this.props.user}</Text>
                         <View style={styles.topBodyContainer}>
                             <Text style={styles.topBodyText}>Sign in with:</Text>
                         </View>
@@ -38,7 +36,6 @@ class SignInScreen extends Component {
                         </TouchableOpacity>
                     </View>
                 </View>
-            </View>
           </ScrollView>
           
         );
@@ -50,7 +47,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    increaseCounter: () => dispatch({type: 'INCREASE_COUNTER'})
+    increaseCounter: () => dispatch(increaseCounter())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignInScreen);
@@ -60,27 +57,16 @@ const styles = StyleSheet.create({
         //pretty sure i dont need this
         flex: 1,
     },
-    container: {
-        // height: Dimensions.get('window').height,
-        backgroundColor: 'grey',
-        height: '100%'
-    },
-    header: {
-        // flex: 5,
-        //375
-        height:'50%' ,
-        backgroundColor: '#F6EF1C',
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
     title: {
-        fontSize: 35,
-        color: '#080C2E'
+        fontSize: 65,
+        color: '#080C2E',
+        textAlign: 'center'
     },
     body: {
         // flex: 4,
         //300
-        height: '50%',
+        flex: 1,
+        // height: '50%',
         backgroundColor: 'white',
         justifyContent: 'center',
     },

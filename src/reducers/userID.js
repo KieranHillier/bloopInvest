@@ -1,8 +1,10 @@
-export default userID = (state = {name: "userID"}, action) => {
+const userID = (state = "AQUIRE.", action) => {
     switch(action.type) {
-        case 'INCREASE_COUNTER':
-            return "meme"
+        case 'CHANGE_NAME':
+            return "SIKE"
         default: 
             return state
     }
 }
+
+export default userID

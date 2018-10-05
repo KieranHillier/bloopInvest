@@ -22,5 +22,6 @@ import userID from './userID'
 
 // export default user 
 export default combineReducers({
-    user
+    user, 
+    userID
 })
