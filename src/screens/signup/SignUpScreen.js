@@ -12,7 +12,7 @@ import {
 } from "react-native"
 import firebase from 'react-native-firebase'
 import { connect } from 'react-redux'
-import { changeName } from '../../actions'
+import { changeName, storeUserInfo } from '../../actions'
 
 
 class SignUpScreen extends Component {
@@ -21,51 +21,64 @@ class SignUpScreen extends Component {
         super()
         this.ref = firebase.auth()
         this.db = firebase.firestore()
-        this.email = 'test7@teat.com'
-        this.fullName = 'bob hillier'
-        this.userName = 'koolkid7'
         this.password = 'asdasd'
+        this.user = {
+            email: 'hello3@teat.com',
+            fullName: 'bob hillier',
+            userName: 'koolkid7'
+        }
     }
 
+    // track all information from TextInput's
+    EmailChange = (email) => this.user.email = email;
+    FullNameChange = (fullName) => this.user.fullName = fullName;
+    UserNameChange = (userName) => this.user.userName = userName;
+    PasswordChange = (password) => this.password = password;
+
+    // create a new Auth() user, add them to firestore, update redux state, navigate to app landing page
     signUpUser = () => {
-        let email = "meme@test.com"
-        let password = "megameme"
-        this.ref.createUserAndRetrieveDataWithEmailAndPassword(this.email, this.password)
+        this.ref.createUserAndRetrieveDataWithEmailAndPassword(this.user.email, this.password)
             .then((user) => {
                 console.log(user.user._user)
+
+                // add new user info to 'users' collection
                 let newUID = user.user._user.uid
                 this.db.collection('users').doc(newUID).set({
-                    name: this.fullName,
-                    username: this.userName,
-                    email: this.email,
+                    name: this.user.fullName,
+                    username: this.user.userName,
+                    email: this.user.email,
                     activity: {
                         test: "test"
                     }
                 })
 
+                // add new user uid & username to 'userList' collection (used for searching users)
                 this.db.collection('userList').doc(this.userName).set({
                     uid: newUID
                 })
             })
             .then(() => {
-                //navigate to home 
+                // dispatch user info to redux 
+                this.props.dispatch(storeUserInfo(this.user))
+            })
+            .then(() => {
+                // navigate to BottomTabNavigator
+                this.props.navigation.navigate('BottomTab') 
             })
             .catch((error) => {alert(error)})
     }
 
-    EmailChange = (email) => this.email = email;
-    FullNameChange = (fullName) => this.fullName = fullName;
-    UserNameChange = (userName) => this.userName = userName;
-    PasswordChange = (password) => this.password = password;
-
+    // test function to check redux store functionality
     changeTheName = () => {
+        console.log(this.props.authUser)
         this.props.dispatch(changeName())
     }
 
     render() {
         return (
-            <ScrollView style={styles.scroll} contentContainerStyle={{flex: 1}}>     
-                  <View style={styles.body}>          
+              
+                  <View style={styles.body}>   
+                    <ScrollView style={styles.scroll}>          
                       <View style={styles.bodyForeground}>
                           <Text style={styles.title}>{this.props.userID}</Text>
                           <View style={styles.topBodyContainer}>
@@ -85,8 +98,9 @@ class SignUpScreen extends Component {
                               <Text style={styles.footerText}>Already have an account? <Text style={styles.footerTextAction}>Sign in!</Text></Text>
                           </TouchableOpacity>
                       </View>
+                      </ScrollView>
                   </View>
-            </ScrollView>
+           
             
           );
     }
@@ -94,7 +108,7 @@ class SignUpScreen extends Component {
 
 const mapStateToProps = state => ({
     userID: state.userID,
-    user: state.user
+    authUser: state.authUser
 })
 
 // const mapDispatchToProps = dispatch => ({
@@ -105,8 +119,11 @@ export default connect(mapStateToProps)(SignUpScreen);
 
 const styles = StyleSheet.create({
     scroll: {
-        flex:1,
-        backgroundColor: 'black',
+        
+        width:null,
+        height: null,
+        backgroundColor: 'white',
+        // justifyContent: 'center',
     },
     title: {
         fontSize: 65,
@@ -115,13 +132,14 @@ const styles = StyleSheet.create({
     },
     body: {
         flex: 1,
-        //300
-        // height: '70%',
-        backgroundColor: 'white',
+        backgroundColor: 'black',
         justifyContent: 'center',
     },
     bodyForeground: {
+        marginTop: 60,
         paddingHorizontal: 30,
+        justifyContent: 'center',
+        // alignItems: 'center'
     },
     topBodyContainer: {
         alignItems: 'center',

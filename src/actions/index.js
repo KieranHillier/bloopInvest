@@ -5,3 +5,8 @@ export const changeName = () => ({
 export const increaseCounter = () => ({
     type: 'INCREASE_COUNTER'
 })
+
+export const storeUserInfo = (user) => ({
+    type: 'STORE_USER',
+    user
+})

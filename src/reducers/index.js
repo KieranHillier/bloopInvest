@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux'
 import user from './user'
 import userID from './userID'
+import authUser from './authUser'
 
 //THIS SHOULD BE THE REDUCE COMBINER BUT IT DOESNT WORK
 
@@ -23,5 +24,6 @@ import userID from './userID'
 // export default user 
 export default combineReducers({
     user, 
-    userID
+    userID,
+    authUser
 })

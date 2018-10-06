@@ -28,7 +28,7 @@ class SignInScreen extends Component {
                         </View>
                         <TextInput style={styles.textInput} placeholder="Username" placeholderTextColor='#080C2E' />   
                         <TextInput style={styles.textInput} placeholder="Password" placeholderTextColor='#080C2E' /> 
-                        <TouchableOpacity style={styles.button} onPress={() => this.props.increaseCounter()}>
+                        <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('BottomTab')}>
                             <Text style={styles.btnText}>Sign In</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.footer} onPress={() => this.props.navigation.navigate('SignUp')}>
