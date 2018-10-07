@@ -23,7 +23,7 @@ class SignUpScreen extends Component {
         this.db = firebase.firestore()
         this.password = 'asdasd'
         this.user = {
-            email: 'hello3@teat.com',
+            email: 'hello84@teat.com',
             fullName: 'bob hillier',
             userName: 'koolkid7'
         }

@@ -10,6 +10,7 @@ import {
     KeyboardAvoidingView,
     Dimensions,
 } from "react-native"
+import { connect } from 'react-redux'
 
 
 class HomeScreen extends Component {
@@ -25,12 +26,18 @@ class HomeScreen extends Component {
         return (   
             <View style={styles.body}>   
                 <Text>Home Screen</Text>
+                <Text>{this.props.authUser}</Text>
             </View>
         );
     }
 }
 
-export default HomeScreen;
+const mapStateToProps = state => ({
+    authUser: state.authUser.email
+    // userID: state.userID,
+})
+
+export default connect(mapStateToProps)(HomeScreen);
 
 const styles = StyleSheet.create({
     body: {
