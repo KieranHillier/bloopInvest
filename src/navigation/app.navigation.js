@@ -25,7 +25,7 @@ const BottomTab = {
 }
 
 const config = {
-    initialRouteName: 'SignIn'
+    initialRouteName: 'BottomTab'
 }
 
 const DrawerNav = createDrawerNavigator({

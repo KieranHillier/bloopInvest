@@ -5,6 +5,7 @@ import SignInScreen from './src/screens/SignInScreen'
 import { Provider } from 'react-redux'
 import store from './src/store'
 import DrawerNav from './src/navigation/app.navigation'
+import SwitchNavigator from './src/navigation/switchNavigator'
 
 type Props = {};
 export default class App extends Component<Props> {
@@ -34,7 +35,7 @@ export default class App extends Component<Props> {
     const { isLoading } = this.state
     return (
       <Provider store={store}>
-        <DrawerNav/>
+        <SwitchNavigator/>
       </Provider>  
     );
   }
