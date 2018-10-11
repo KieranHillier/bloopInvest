@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, View} from 'react-native';
 import firebase from 'react-native-firebase';
-import SignInScreen from './src/screens/SignInScreen'
 import { Provider } from 'react-redux'
 import store from './src/store'
-import DrawerNav from './src/navigation/app.navigation'
 import SwitchNavigator from './src/navigation/switchNavigator'
 
 type Props = {};

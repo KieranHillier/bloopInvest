@@ -12,7 +12,7 @@ import {
 } from "react-native"
 import firebase from 'react-native-firebase'
 import { connect } from 'react-redux'
-import { changeName, storeUserInfo } from '../../actions'
+import { changeName, storeUserInfo } from '../../../actions'
 
 
 class SignUpScreen extends Component {
@@ -23,7 +23,7 @@ class SignUpScreen extends Component {
         this.db = firebase.firestore()
         this.password = 'asdasd'
         this.user = {
-            email: 'hello84@teat.com',
+            email: 'plswork2@rawr.com',
             fullName: 'bob hillier',
             userName: 'koolkid7'
         }
@@ -63,7 +63,7 @@ class SignUpScreen extends Component {
             })
             .then(() => {
                 // navigate to BottomTabNavigator
-                this.props.navigation.navigate('BottomTab') 
+                this.props.navigation.navigate('App') 
             })
             .catch((error) => {alert(error)})
     }
@@ -82,7 +82,7 @@ class SignUpScreen extends Component {
                       <View style={styles.bodyForeground}>
                           <Text style={styles.title}>{this.props.userID}</Text>
                           <View style={styles.topBodyContainer}>
-                              <Text style={styles.topBodyText}>Sign up with:</Text>
+                              <Text style={styles.topBodyText}>Sign up ASd with:</Text>
                           </View>
                           <TextInput style={styles.textInput} placeholder="Username" placeholderTextColor='#080C2E' onChangeText={this.UserNameChange}/>   
                           <TextInput style={styles.textInput} placeholder="Name" placeholderTextColor='#080C2E' onChangeText={this.FullNameChange}/> 
@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     bodyForeground: {
-        marginTop: 60,
+        marginTop: 20,
         paddingHorizontal: 30,
         justifyContent: 'center',
         // alignItems: 'center'

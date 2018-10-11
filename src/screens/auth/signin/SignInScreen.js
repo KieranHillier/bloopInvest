@@ -12,7 +12,7 @@ import {
 } from "react-native"
 import { Container, Content, Form, Item, Input } from 'native-base'
 import { connect } from 'react-redux'
-import { increaseCounter } from '../actions'
+import { increaseCounter } from '../../../actions'
 
 class SignInScreen extends Component {
 
@@ -28,7 +28,7 @@ class SignInScreen extends Component {
                         </View>
                         <TextInput style={styles.textInput} placeholder="Username" placeholderTextColor='#080C2E' />   
                         <TextInput style={styles.textInput} placeholder="Password" placeholderTextColor='#080C2E' /> 
-                        <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('BottomTab')}>
+                        <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('App')}>
                             <Text style={styles.btnText}>Sign In</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.footer} onPress={() => this.props.navigation.navigate('SignUp')}>

@@ -6,11 +6,6 @@ import {
 } from "react-native";
 
 class DiscoverScreen extends Component {
-
-    static navigationOptions = {
-        title: 'Home',
-    };
-
     render() {
         return (
             <View style={styles.container}>
