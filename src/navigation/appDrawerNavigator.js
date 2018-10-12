@@ -1,5 +1,5 @@
 import { createDrawerNavigator, createStackNavigator, createBottomTabNavigator } from 'react-navigation'
-import DashBoardScreen from '../screens/app/dashboard/DashBoardScrenn'
+import DashBoardScreen from '../screens/app/dashboard/DashBoardScreen'
 import PortfolioScreen from '../screens/app/portfolio/PortfolioScreen'
 import DiscoverScreen from '../screens/app/discover/DiscoverScreen'
 
