@@ -2,10 +2,11 @@ import React, { Component } from "react";
 import { 
     View,
     Text,
-    StyleSheet
+    StyleSheet,
+    Image,
+    ScrollView
 } from "react-native";
-import { AreaChart, Grid, LineChart } from 'react-native-svg-charts'
-import * as shape from 'd3-shape'
+import PortfolioStockCard from '../../../components/portfolioStockCard'
 
 class PortfolioScreen extends Component {
     render() {
@@ -16,16 +17,20 @@ class PortfolioScreen extends Component {
             <View style={styles.container}>
                 <View style={styles.userStatsBackground}>
                     <View style={styles.userStatsForeground}>
-                        <LineChart
-                            style={{ height: '100%' }}
-                            data={ data }
-                            svg={{ stroke: 'rgb(134, 65, 244)', strokeWidth: 3 }}
-                            contentInset={{ top: 20, bottom: 20 }}
-                            >
-                        </LineChart>
+                        <View style={styles.userTop}></View>
+                        <View style={styles.userBottom}></View>
                     </View>
                 </View>
-                <Text>PortfolioScreen</Text>
+                <ScrollView style={{flex:1}}>
+                    <Text>PortfolioScreen</Text>
+                    <PortfolioStockCard data={data}/>
+                    <PortfolioStockCard data={data}/>
+                    <PortfolioStockCard data={data}/>
+                    <PortfolioStockCard data={data}/>
+                    <PortfolioStockCard data={data}/>
+                    <PortfolioStockCard data={data}/>
+                </ScrollView>
+                
                 
             </View>
         );
@@ -36,6 +41,7 @@ export default PortfolioScreen;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: 'lightgrey'
         // alignItems: 'center',
         // justifyContent: 'center'
     },
@@ -48,5 +54,15 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: 'lightblue',
         marginHorizontal: 20
-    }
+    },
+    userTop: {
+        height: '55%',
+        width: '100%',
+        backgroundColor: 'pink'
+    },
+    userBottom: {
+        height: '45%',
+        width: '100%',
+        backgroundColor: 'grey'
+    },
 });
