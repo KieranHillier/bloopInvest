@@ -17,7 +17,9 @@ class PortfolioScreen extends Component {
             <View style={styles.container}>
                 <View style={styles.userStatsBackground}>
                     <View style={styles.userStatsForeground}>
-                        <View style={styles.userTop}></View>
+                        <View style={styles.userTop}>
+
+                        </View>
                         <View style={styles.userBottom}></View>
                     </View>
                 </View>
@@ -29,9 +31,7 @@ class PortfolioScreen extends Component {
                     <PortfolioStockCard data={data}/>
                     <PortfolioStockCard data={data}/>
                     <PortfolioStockCard data={data}/>
-                </ScrollView>
-                
-                
+                </ScrollView> 
             </View>
         );
     }
