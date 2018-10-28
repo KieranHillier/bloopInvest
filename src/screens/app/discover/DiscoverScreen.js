@@ -34,6 +34,7 @@ const StockScreen = {
   }
   
   const RouteConfig = {
+    swipeEnabled: false,
     tabBarOptions: {
       style: {
         backgroundColor: 'white',
