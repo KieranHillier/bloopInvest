@@ -4,25 +4,17 @@ import {
     Text,
     StyleSheet
 } from "react-native";
-import { connect } from 'react-redux'
 
-class DashBoardScreen extends Component {
+class DiscoverStockScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text>DashBoardScreen</Text>
-                <Text>{this.props.authUser}</Text>
+                <Text>DiscoverStockScreen</Text>
             </View>
         );
     }
 }
-
-const mapStateToProps = state => ({
-    authUser: state.authUser.email
-    // userID: state.userID,
-})
-
-export default connect(mapStateToProps)(DashBoardScreen);
+export default DiscoverStockScreen;
 
 const styles = StyleSheet.create({
     container: {

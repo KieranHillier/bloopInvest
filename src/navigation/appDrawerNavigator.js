@@ -2,26 +2,40 @@ import { createDrawerNavigator, createStackNavigator, createBottomTabNavigator }
 import DashBoardScreen from '../screens/app/dashboard/DashBoardScreen'
 import PortfolioScreen from '../screens/app/portfolio/PortfolioScreen'
 import DiscoverScreen from '../screens/app/discover/DiscoverScreen'
+import colors from '../assets/colors/theme'
 
 const Dashboard = {
     screen: DashBoardScreen,
     navigationOptions: {
-        title: 'Dashboard'
+        title: 'Dashboard',
+        headerTintColor: 'white',
+        headerStyle: {
+            backgroundColor: colors.main
+        }
     }
 }
 
 const Portfolio = {
     screen: PortfolioScreen,
     navigationOptions: {
-        title: 'Portfolio'
+        title: 'Portfolio',
+        headerTintColor: 'white',
+        headerStyle: {
+            backgroundColor: colors.main
+        }
     }
 }
 
 const Discover = {
     screen: DiscoverScreen,
     navigationOptions: {
-        title: 'Discover'
-    }
+        title: 'Discover',
+        headerTintColor: 'white',
+        headerStyle: {
+            backgroundColor: colors.main
+        }
+    },
+
 }
 
 const DashboardStackNavigator = createStackNavigator({
@@ -36,6 +50,14 @@ const DiscoverStackNavigator = createStackNavigator({
     Discover
 })
 
+const BottomTabStyles = {
+    tabBarOptions: {
+        style: {
+            backgroundColor: colors.main
+        }
+    }
+}
+
 const AppTabNavigator = createBottomTabNavigator({
     Dashboard: {
         screen: DashboardStackNavigator,  
@@ -46,7 +68,7 @@ const AppTabNavigator = createBottomTabNavigator({
     Discover: {
         screen: DiscoverStackNavigator,
     },
-})
+}, BottomTabStyles)
 
 // const OverallStackNavigator = {
 //     screen: AppTabNavigator,
