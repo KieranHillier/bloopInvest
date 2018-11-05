@@ -8,6 +8,7 @@ import { createMaterialTopTabNavigator } from 'react-navigation';
 import DiscoverStockScreen from './headings/DiscoverStockScreen'
 import DiscoverPeopleScreen from './headings/DiscoverPeopleScreen'
 import DiscoverGroupsScreen from './headings/DiscoverGroupsScreen'
+import colors from '../../../assets/colors/theme'
 
 class DiscoverScreen extends Component {
     render() {
@@ -37,15 +38,15 @@ const StockScreen = {
     swipeEnabled: false,
     tabBarOptions: {
       style: {
-        backgroundColor: 'white',
+        backgroundColor: colors.main,
       },
       labelStyle: {
-        color: 'black',
+        color: colors.text,
         fontSize: 20
         
       },
       indicatorStyle: {
-          backgroundColor: 'orange'
+          backgroundColor: colors.text
       }
     }
   }

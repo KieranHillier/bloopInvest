@@ -8,7 +8,7 @@ const Dashboard = {
     screen: DashBoardScreen,
     navigationOptions: {
         title: 'Dashboard',
-        headerTintColor: 'white',
+        headerTintColor: colors.text,
         headerStyle: {
             backgroundColor: colors.main
         }
@@ -19,7 +19,7 @@ const Portfolio = {
     screen: PortfolioScreen,
     navigationOptions: {
         title: 'Portfolio',
-        headerTintColor: 'white',
+        headerTintColor: colors.text,
         headerStyle: {
             backgroundColor: colors.main
         }
@@ -30,10 +30,12 @@ const Discover = {
     screen: DiscoverScreen,
     navigationOptions: {
         title: 'Discover',
-        headerTintColor: 'white',
+        headerTintColor: colors.text,
         headerStyle: {
-            backgroundColor: colors.main
-        }
+            backgroundColor: colors.main,
+            elevation: 0, // remove shadow on Android
+            shadowOpacity: 0, // remove shadow on iOS
+        },
     },
 
 }
