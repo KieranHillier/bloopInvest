@@ -34,7 +34,8 @@ const Discover = {
         headerStyle: {
             backgroundColor: colors.main,
             elevation: 0, // remove shadow on Android
-            shadowOpacity: 0, // remove shadow on iOS
+            shadowOpacity: 0, // remove shadow on iOS,
+            height: 50
         },
     },
 

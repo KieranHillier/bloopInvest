@@ -14,14 +14,16 @@ import { Row } from "native-base";
 import colors from "../../../../assets/colors/theme";
 import { AreaChart, Grid, LineChart } from 'react-native-svg-charts'
 import * as shape from 'd3-shape'
+import FeaturedStockCard from '../../../../components/featuredStockCard'
+import IndustryContainer from '../../../../components/industryContainer'
 
 var width = Dimensions.get('window').width; //full width
 var height = Dimensions.get('window').height; //full height
 
 const stockCards = [
-    {id:0, stockName: "goog"},
-    {id:1, stockName: "twtr"},
-    {id:2, stockName: "meme"},
+    {id:0, stockName: "GOOGL"},
+    {id:1, stockName: "TWTR"},
+    {id:2, stockName: "MEME"},
     {id:3, stockName: "XD"},
     {id:4, stockName: "6969"},
 ]
@@ -111,7 +113,7 @@ class DiscoverStockScreen extends Component {
                 
                 return(
                     <Animated.View {...this.PanResponder.panHandlers} key={item.id} style={[this.rotateAndTranslate, styles.stockCard]}>
-                        <Text>{item.stockName}</Text>
+                        <FeaturedStockCard name={item.stockName} />
                     </Animated.View>
                 )
                 
@@ -119,7 +121,7 @@ class DiscoverStockScreen extends Component {
             } else {
                 return(
                     <Animated.View key={item.id} style={[{opacity: this.nextCardOpacity, transform: [{scale: this.nextCardScale}]}, styles.stockCard]}>
-                        <Text>{item.stockName}</Text>
+                        <FeaturedStockCard />
                     </Animated.View>
                 )
             }
@@ -142,76 +144,17 @@ class DiscoverStockScreen extends Component {
         return (
             <View style={styles.container}>
                 <ScrollView style={styles.foreground}>
-                    <Text style={styles.subheading}>Trending</Text>
                     <View style={styles.stockCardContainer}>
-                        <Animated.View style={[styles.stockCard]}>
-                            <View style={{flexDirection: 'row', justifyContent: 'space-between', paddingTop: 5, paddingHorizontal: 10}}>
-                                <Text style={{fontSize: 39, color: colors.text}}>GOOGL</Text>
-                                <Text style={{fontSize: 39, color: colors.text}}>$1042</Text>
-
-                            </View>
-                            <View style={{flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 11}}>
-                                <Text style={{fontSize: 12, fontWeight: '500', color: colors.text}}>NASDAQ: <Text style={{fontSize: 12, fontWeight: '200'}}>Alphabet Inc.</Text></Text>
-                                <Text style={{fontSize: 17, fontWeight: '500', color: '#61D943'}}>15.6 (2.1%)</Text>
-                            </View>
-                            <View style={{flex: 1, backgroundColor: 'white', paddingHorizontal: 11}}>
-                                <LineChart
-                                    style={{ height: '100%' }}
-                                    data={ data }
-                                    svg={{ stroke: '#61D943', strokeWidth: 3 }}
-                                    contentInset={{ top: 20, bottom: 20 }}
-                                    >
-                                </LineChart>
-                            </View>
-                            <View style={{flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 11, paddingBottom: 5}}> 
-                                <Text style={{fontSize: 28, fontWeight: '500', color: colors.text}}>126 <Text style={{fontSize: 12, fontWeight: '200'}}>last week</Text></Text>
-                                <View style={{justifyContent: 'space-between', flexDirection: 'row'}}>
-                                    <TouchableOpacity style={{backgroundColor: '#FFB534', elevation: 2, justifyContent: 'center', alignItems: 'center', width: 80, borderRadius: 12,}}>
-                                        <Text style={{color: colors.main, fontWeight: 'bold', fontSize: 15}}>PH</Text>
-                                    </TouchableOpacity>
-                                    <TouchableOpacity style={{backgroundColor: '#FFB534', elevation: 2, justifyContent: 'center', alignItems: 'center', width: 80, borderRadius: 12, marginLeft: 8}}>
-                                        <Text style={{color: colors.main, fontWeight: 'bold', fontSize: 15}}>Watchlist</Text>
-                                    </TouchableOpacity>
-                                </View>
-                            </View>
-                            
-                        </Animated.View>
+                        {this.renderStocks()}
                     </View>
-                    <Text style={styles.subheading}>Industries</Text>
-                    <View style={styles.industryContainer}>
-                        <View style={[styles.industryCard, styles.industryCardLeft]}>
-                            <Text style={styles.industryText}>TECHNOLOGY</Text>
-                        </View>
-                        <View style={[styles.industryCard, styles.industryCardRight]}>
-                            <Text style={styles.industryText}>ENVIRONMENT</Text>
-                        </View>
+                    <View style={{flex: 1, backgroundColor: colors.secondary, marginTop: 40}}>
+                        <Text style={styles.subheading}>Industries</Text>
+                        <IndustryContainer industryOne={'TECHNOLOGY'} industryTwo={'ENVIRONMENT'} />
+                        <IndustryContainer industryOne={'HEALTHCARE'} industryTwo={'FINANCE'} />
+                        <IndustryContainer industryOne={'DAVID'} industryTwo={'SUX'} />
+                        <IndustryContainer industryOne={'DIX'} industryTwo={'HEHE'} />
+                        <View style={styles.footer}></View>
                     </View>
-                    <View style={styles.industryContainer}>
-                        <View style={[styles.industryCard, styles.industryCardLeft]}>
-                            <Text style={styles.industryText}>HEALTHCARE</Text>
-                        </View>
-                        <View style={[styles.industryCard, styles.industryCardRight]}>
-                            <Text style={styles.industryText}>FINANCE</Text>
-                        </View>
-                    </View>
-                    <View style={styles.industryContainer}>
-                        <View style={[styles.industryCard, styles.industryCardLeft]}>
-                            <Text style={styles.industryText}>DAVID</Text>
-                        </View>
-                        <View style={[styles.industryCard, styles.industryCardRight]}>
-                            <Text style={styles.industryText}>SUX</Text>
-                        </View>
-                    </View>
-                    <View style={styles.industryContainer}>
-                        <View style={[styles.industryCard, styles.industryCardLeft]}>
-                            <Text style={styles.industryText}>DIX</Text>
-                        </View>
-                        <View style={[styles.industryCard, styles.industryCardRight]}>
-                            <Text style={styles.industryText}>HEHE</Text>
-                        </View>
-                    </View>
-                    <View style={styles.footer}></View>
-                    
                 </ScrollView>
             </View>
         );
@@ -222,7 +165,7 @@ export default DiscoverStockScreen;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'white',
+        backgroundColor: colors.background,
         
     },
     foreground: {
@@ -234,20 +177,24 @@ const styles = StyleSheet.create({
     subheading: {
         fontSize: 20,
         textAlign: 'left',
-        fontWeight: 'bold',
+        fontWeight: 'normal',
         marginTop: '3%',
-        color: '#545454',
-        marginLeft: '5%',
+        color: colors.main,
+        marginLeft: '3%',
+        marginBottom: '1.5%',
     },
     stockCardContainer: {
         height: height * 0.325,
-        marginLeft: '5%',
-        marginRight: '5%',
+        marginLeft: '3%',
+        marginRight: '3%',
+        marginTop: '5%',
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     stockCard: {
         position: 'absolute',
         height: height * 0.325,
-        width: width * 0.9,
+        width: '100%',
         backgroundColor: 'white',
         // borderWidth: 1,
         borderRadius: 12,
@@ -267,8 +214,8 @@ const styles = StyleSheet.create({
         alignItems: 'stretch',
         justifyContent: 'space-between',
         marginBottom: 5,
-        marginLeft: '5%',
-        marginRight: '5%',
+        marginLeft: '3%',
+        marginRight: '3%',
     },
     industryCard: {
         flex: 1,

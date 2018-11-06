@@ -39,14 +39,29 @@ const StockScreen = {
     tabBarOptions: {
       style: {
         backgroundColor: colors.main,
+        height: 50,
+        justifyContent: 'center',
+        paddingBottom: 10,
+       
       },
       labelStyle: {
         color: colors.text,
-        fontSize: 20
+        fontSize: 20,
+        textAlign: 'center',
+        lineHeight: 20
+        
         
       },
       indicatorStyle: {
-          backgroundColor: colors.text
+          backgroundColor: colors.text,
+          marginBottom: 7,
+          alignSelf: 'center',
+          width: 90,
+          marginLeft: 16
+      },
+      tabStyle: {
+          justifyContent: 'center',
+          alignItems: 'center'
       }
     }
   }
