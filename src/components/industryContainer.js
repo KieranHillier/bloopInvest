@@ -5,6 +5,7 @@ import {
     StyleSheet,
     Dimensions,
 } from "react-native";
+import colors from "../assets/colors/theme";
 
 var width = Dimensions.get('window').width; //full width
 var height = Dimensions.get('window').height; //full height
@@ -57,6 +58,7 @@ const styles = StyleSheet.create({
         marginLeft: 5
     },
     industryText: {
-        fontSize: 19,
+        fontSize: 16,
+        color: colors.text,
     },
 });

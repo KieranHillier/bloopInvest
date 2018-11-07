@@ -2,6 +2,7 @@ import { createDrawerNavigator, createStackNavigator, createBottomTabNavigator }
 import DashBoardScreen from '../screens/app/dashboard/DashBoardScreen'
 import PortfolioScreen from '../screens/app/portfolio/PortfolioScreen'
 import DiscoverScreen from '../screens/app/discover/DiscoverScreen'
+import DetailedStockScreen from '../screens/app/other/detailedStock'
 import colors from '../assets/colors/theme'
 
 const Dashboard = {
@@ -41,6 +42,11 @@ const Discover = {
 
 }
 
+const DetailedStock = {
+    screen: DetailedStockScreen,
+    navigationOptions: {}
+}
+
 const DashboardStackNavigator = createStackNavigator({
     Dashboard
 })
@@ -50,7 +56,8 @@ const PortfolioStackNavigator = createStackNavigator({
 })
 
 const DiscoverStackNavigator = createStackNavigator({
-    Discover
+    Discover,
+    DetailedStock
 })
 
 const BottomTabStyles = {

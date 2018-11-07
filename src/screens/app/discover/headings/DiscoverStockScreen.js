@@ -104,6 +104,10 @@ class DiscoverStockScreen extends Component {
         })
     }
 
+    detailsPage = () => {
+        this.props.navigation.navigate('People')
+    }
+
     renderStocks = () => {
         return stockCards.map((item, i) => {
 
@@ -113,7 +117,7 @@ class DiscoverStockScreen extends Component {
                 
                 return(
                     <Animated.View {...this.PanResponder.panHandlers} key={item.id} style={[this.rotateAndTranslate, styles.stockCard]}>
-                        <FeaturedStockCard name={item.stockName} />
+                        <FeaturedStockCard name={item.stockName}/>
                     </Animated.View>
                 )
                 
@@ -137,6 +141,19 @@ class DiscoverStockScreen extends Component {
         }).reverse()
     }
 
+    renderCards = () => {
+        return stockCards.map((item, i) => {
+                
+                return(
+                    <Animated.View key={item.id} style={styles.stockCard}>
+                        <FeaturedStockCard name={item.stockName} />
+                    </Animated.View>
+                )
+            
+        }).reverse()
+    }
+
+
     render() {
 
         const data = [ 50, 10, 40, 95, -4, -24, 85, 91, 35, 53, -53, 24, 50, -20, -80, 50, 10, 40, 95, -4, -24, 85, 91, 35, 53, -53, 24, 50, -20, -80 ]
@@ -149,6 +166,14 @@ class DiscoverStockScreen extends Component {
                     </View>
                     <View style={{flex: 1, backgroundColor: colors.secondary, marginTop: 40}}>
                         <Text style={styles.subheading}>Industries</Text>
+                        <View style={styles.industryContainer}>
+                            <TouchableOpacity style={[styles.industryCard, styles.industryCardLeft]}>
+                                <Text style={styles.industryText}>TING</Text>
+                            </TouchableOpacity>
+                            <View style={[styles.industryCard, styles.industryCardRight]}>
+                                <Text style={styles.industryText}>TECH</Text>
+                            </View>
+                        </View>
                         <IndustryContainer industryOne={'TECHNOLOGY'} industryTwo={'ENVIRONMENT'} />
                         <IndustryContainer industryOne={'HEALTHCARE'} industryTwo={'FINANCE'} />
                         <IndustryContainer industryOne={'DAVID'} industryTwo={'SUX'} />
@@ -189,7 +214,8 @@ const styles = StyleSheet.create({
         marginRight: '3%',
         marginTop: '5%',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        flexDirection: 'row'
     },
     stockCard: {
         position: 'absolute',

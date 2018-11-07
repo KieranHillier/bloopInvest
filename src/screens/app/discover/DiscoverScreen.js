@@ -50,7 +50,6 @@ const StockScreen = {
         textAlign: 'center',
         lineHeight: 20
         
-        
       },
       indicatorStyle: {
           backgroundColor: colors.text,

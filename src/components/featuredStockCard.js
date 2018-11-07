@@ -17,7 +17,7 @@ var height = Dimensions.get('window').height; //full height
 
 const FeaturedStockCard = (props) => (
     
-    <View style={{flex:1}}>
+    <View onPress={() => {}} style={{flex:1}}>
         <View style={{flexDirection: 'row', justifyContent: 'space-between', paddingTop: 5, paddingHorizontal: 10}}>
             <Text style={{fontSize: 39, color: colors.text, fontFamily: 'Roboto'}}>{props.name}</Text>
             <Text style={{fontSize: 39, color: colors.text, }}>$1042</Text>
