@@ -20,7 +20,7 @@ const FeaturedStockCard = (props) => (
     <View onPress={() => {}} style={{flex:1}}>
         <View style={{flexDirection: 'row', justifyContent: 'space-between', paddingTop: 5, paddingHorizontal: 10}}>
             <Text style={{fontSize: 39, color: colors.text, fontFamily: 'Roboto'}}>{props.name}</Text>
-            <Text style={{fontSize: 39, color: colors.text, }}>$1042</Text>
+            <Text style={{fontSize: 39, color: colors.text, }}>$1,042.36</Text>
 
         </View>
         <View style={{flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 14}}>

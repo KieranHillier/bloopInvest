@@ -8,10 +8,7 @@ import {
     Animated, 
     PanResponder, 
     Button, 
-    TouchableOpacity,
-    ViewPagerAndroid,
-    StatusBar,
-    RefreshControl
+    TouchableOpacity
 } from "react-native";
 import { Row } from "native-base";
 import colors from "../../../../assets/colors/theme";
@@ -31,8 +28,6 @@ const stockCards = [
     {id:4, stockName: "6969"},
 ]
 
-let active = '#000000'
-
 class DiscoverStockScreen extends Component {
 
     constructor(){
@@ -40,43 +35,110 @@ class DiscoverStockScreen extends Component {
 
         this.position = new Animated.ValueXY()
         this.state = {
-            currentIndex: 0,
-            refreshing: false,
-            active: '#000000',
+            currentIdex: 0
         }
+
+        this.rotate = this.position.x.interpolate({
+            inputRange: [-width / 2, 0, width / 2],
+            outputRange: ['-10deg', '0deg', '10deg'],
+            extrapolate: 'clamp'
+        })
+
+        this.rotateAndTranslate = {
+            transform:[{
+                rotate: this.rotate
+            }, ...this.position.getTranslateTransform() ]
+        }
+
+        this.nextCardOpacity = this.position.x.interpolate({
+            inputRange: [-width / 2, 0, width / 2],
+            outputRange: [1, 0, 1],
+            extrapolate: 'clamp'
+        })
+
+        this.nextCardScale = this.position.x.interpolate({
+            inputRange: [-width / 2, 0, width / 2],
+            outputRange: [1, 0.8, 1],
+            extrapolate: 'clamp'
+        })
     }
 
     componentWillMount() {
-
+        this.PanResponder = PanResponder.create({
+            onStartShouldSetPanResponder:(evt, gestureState) => true,
+            onPanResponderMove:(evt, gestureState) => {
+                this.position.setValue({x: gestureState.dx, y: gestureState.dy})
+            },
+            onPanResponderRelease:(evt, gestureState) => {
+                if (this.state.currentIdex < 4) {
+                    if (gestureState.dx > 180) {
+                        Animated.spring(this.position, {
+                            toValue: {x: width + 100, y: gestureState.dy}
+                        }).start(() => {
+                            this.setState({ currentIdex: this.state.currentIdex + 1}, () => {
+                                this.position.setValue({x:0, y:0})
+                            })
+                        })
+                    } else if (gestureState.dx < -180) {
+                        Animated.spring(this.position, {
+                            toValue: {x: -width - 100, y: gestureState.dy}
+                        }).start(() => {
+                            this.setState({ currentIdex: this.state.currentIdex + 1}, () => {
+                                this.position.setValue({x:0, y:0})
+                            })
+                        })
+                    } else {
+                        Animated.spring(this.position, {
+                            toValue: {x: 0, y: 0},
+                            friction: 4
+                        }).start()
+                    }
+                } else {
+                    Animated.spring(this.position, {
+                        toValue: {x: 0, y: 0},
+                        friction: 4
+                    }).start()
+                }
+               
+            }
+        })
     }
 
     detailsPage = () => {
         this.props.navigation.navigate('People')
     }
 
-    // onRefresh = () => {
-    //     this.setState({refreshing: true})
-    //     fetchData().then(() => {
-    //         this.setState({refreshing: false})
-    //     })
-    // }
+    renderStocks = () => {
+        return stockCards.map((item, i) => {
 
-    switchFeatured = (e) => {
-        // alert(e.nativeEvent.position)
-        // active = 'pink'
-        let newPosition = e.nativeEvent.position
-        let previousPosition = this.state.currentIndex
+            if (i < this.state.currentIdex) {
+                return null
+            } else if (i == this.state.currentIdex) {
+                
+                return(
+                    <Animated.View {...this.PanResponder.panHandlers} key={item.id} style={[this.rotateAndTranslate, styles.stockCard]}>
+                        <FeaturedStockCard name={item.stockName}/>
+                    </Animated.View>
+                )
+                
+                
+            } else {
+                return(
+                    <Animated.View key={item.id} style={[{opacity: this.nextCardOpacity, transform: [{scale: this.nextCardScale}]}, styles.stockCard]}>
+                        <FeaturedStockCard />
+                    </Animated.View>
+                )
+            }
 
-        if (newPosition > previousPosition) {
-            this.setState({
-                currentIndex: previousPosition += 1
-            })
-        } else {
-            this.setState({
-                currentIndex: previousPosition -= 1
-            }) 
-        }
-        
+
+            // return(
+            //     <Animated.View {...this.PanResponder.panHandlers} key={item.id} style={[{transform:this.position.getTranslateTransform()}, styles.stockCard]}>
+            //         <Text>{item.stockName}</Text>
+            //     </Animated.View>
+            // )
+
+            
+        }).reverse()
     }
 
     renderCards = () => {
@@ -88,34 +150,24 @@ class DiscoverStockScreen extends Component {
                     </Animated.View>
                 )
             
-        })
+        }).reverse()
     }
+
 
     render() {
 
         const data = [ 50, 10, 40, 95, -4, -24, 85, 91, 35, 53, -53, 24, 50, -20, -80, 50, 10, 40, 95, -4, -24, 85, 91, 35, 53, -53, 24, 50, -20, -80 ]
-        const { currentIndex }  = this.state
 
         return (
             <View style={styles.container}>
-                <StatusBar backgroundColor='#ECEAEA' barStyle='dark-content'/>
-                <ScrollView refreshControl={<RefreshControl refreshing={this.state.refreshing} onRefresh={this.onRefresh}/>} style={styles.foreground} showsVerticalScrollIndicator={false}>
-                   
-                    <ViewPagerAndroid style={styles.stockCardContainer} initialPage={0} pageMargin={15} onPageSelected={this.switchFeatured}>
-                        {this.renderCards()}
-    
-                    </ViewPagerAndroid>
-                    <View style={{alignSelf: 'flex-end', flexDirection: 'row', marginRight: '3%', marginTop: 10}}>
-                        <View style={[styles.featuredDot, currentIndex == 0 ? styles.featuredDotActive : styles.featuredDotInactive]}></View>
-                        <View style={[styles.featuredDot, currentIndex == 1 ? styles.featuredDotActive : styles.featuredDotInactive]}></View>
-                        <View style={[styles.featuredDot, currentIndex == 2 ? styles.featuredDotActive : styles.featuredDotInactive]}></View>
-                        <View style={[styles.featuredDot, currentIndex == 3 ? styles.featuredDotActive : styles.featuredDotInactive]}></View>
-                        <View style={[styles.featuredDot, currentIndex == 4 ? styles.featuredDotActive : styles.featuredDotInactive]}></View>    
+                <ScrollView style={styles.foreground}>
+                    <View style={styles.stockCardContainer}>
+                        {this.renderStocks()}
                     </View>
-                    <View style={{flex: 1, backgroundColor: colors.secondary, marginTop: 15}}>
+                    <View style={{flex: 1, backgroundColor: colors.secondary, marginTop: 40}}>
                         <Text style={styles.subheading}>Industries</Text>
                         <View style={styles.industryContainer}>
-                            <TouchableOpacity onPress={() => this.props.navigation.navigate('DetailedStock')} style={[styles.industryCard, styles.industryCardLeft]}>
+                            <TouchableOpacity style={[styles.industryCard, styles.industryCardLeft]}>
                                 <Text style={styles.industryText}>TING</Text>
                             </TouchableOpacity>
                             <View style={[styles.industryCard, styles.industryCardRight]}>
@@ -221,16 +273,4 @@ const styles = StyleSheet.create({
     footer: {
         height: 20
     },
-    featuredDot: {
-        width: 8, 
-        height: 8,
-        marginRight: 5,
-        borderRadius: 20
-    },
-    featuredDotActive: {
-        backgroundColor: colors.text
-    },
-    featuredDotInactive: {
-        backgroundColor: '#C4C4C4'
-    }
 });

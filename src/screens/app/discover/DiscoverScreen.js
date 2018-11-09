@@ -4,10 +4,12 @@ import {
     Text,
     StyleSheet
 } from "react-native";
-import { createMaterialTopTabNavigator } from 'react-navigation';
+import { createMaterialTopTabNavigator, createStackNavigator } from 'react-navigation';
 import DiscoverStockScreen from './headings/DiscoverStockScreen'
 import DiscoverPeopleScreen from './headings/DiscoverPeopleScreen'
 import DiscoverGroupsScreen from './headings/DiscoverGroupsScreen'
+import DetailedStockScreen from '../other/detailedStock'
+
 import colors from '../../../assets/colors/theme'
 
 class DiscoverScreen extends Component {
@@ -33,6 +35,22 @@ const StockScreen = {
     screen: DiscoverGroupsScreen,
     navigationOptions: {}
   }
+
+  const DetailedStock = {
+    screen: DetailedStockScreen,
+    navigationOptions: {}
+}
+
+  const stackStyle = {
+      navigationOptions: {
+          header: null
+      }
+  }
+
+  const StockScreenStackNavigator = createStackNavigator({
+    StockScreen,
+    DetailedStock
+  }, stackStyle)
   
   const RouteConfig = {
     swipeEnabled: false,
@@ -66,7 +84,7 @@ const StockScreen = {
   }
   
 const AppTopNavigator = createMaterialTopTabNavigator({
-    Stocks: StockScreen,
+    Stocks: StockScreenStackNavigator,
     People: PeopleScreen,
     Groups: GroupsScreen
 }, RouteConfig)
