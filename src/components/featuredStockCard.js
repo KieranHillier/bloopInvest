@@ -18,7 +18,7 @@ var height = Dimensions.get('window').height; //full height
 
 const FeaturedStockCard = (props) => (
     
-    <TouchableOpacity onPress={() => props.navigation.navigate('Details', {stockName: props.name})} style={{flex:1}}>
+    <TouchableOpacity activeOpacity={1} onPress={() => props.navigation.navigate('Details', {stockName: props.name})} style={{flex:1}}>
         <View style={{flexDirection: 'row', justifyContent: 'space-between', paddingTop: 5, paddingHorizontal: 10}}>
             <Text style={{fontSize: 39, color: colors.text, fontFamily: 'Roboto'}}>{props.name}</Text>
             <Text style={{fontSize: 39, color: colors.text, }}>$1,042.36</Text>
