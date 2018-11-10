@@ -5,6 +5,7 @@ import DiscoverScreen from '../screens/app/discover/DiscoverScreen'
 import colors from '../assets/colors/theme'
 import React from "react";
 import { View, Text, TextInput } from 'react-native'
+import DetailedStockScreen from '../screens/app/other/detailedStock'
 
 const Dashboard = {
     screen: DashBoardScreen,
@@ -38,7 +39,7 @@ createHeader = () => {
     )
 }
 
-const Discover = {
+const DiscoverTopNavigator = {
     screen: DiscoverScreen,
     navigationOptions: {
         header: createHeader(),
@@ -54,6 +55,17 @@ const Discover = {
 
 }
 
+const DetailedStockss = {
+    screen: DetailedStockScreen,
+    navigationOptions: ({ navigation }) => ({
+        title: navigation.state.params.stockName,
+        headerTintColor: colors.main,
+        headerStyle: {
+            backgroundColor: colors.text
+        }
+    })
+}
+
 
 const DashboardStackNavigator = createStackNavigator({
     Dashboard
@@ -64,10 +76,14 @@ const PortfolioStackNavigator = createStackNavigator({
 })
 
 const DiscoverStackNavigator = createStackNavigator({
-    Discover
+    DiscoverTopNavigator,
+    Detail: DetailedStockss,
 })
 
 const BottomTabStyles = {
+    navigationOptions: {
+        header: null
+    },
     tabBarOptions: {
         style: {
             backgroundColor: colors.main
@@ -98,8 +114,18 @@ const AppTabNavigator = createBottomTabNavigator({
 //     AppTabNavigator: OverallStackNavigator
 // })
 
-const AppDrawerNavigator = createDrawerNavigator({
-    Home: AppTabNavigator
+const AppConfing = {
+    navigationOptions: {
+        header: null
+    }
+}
+
+const AppDrawerNavigator = createStackNavigator({
+    Home: {
+        screen: AppTabNavigator,
+        navigationOptions: { header: null}
+    },
+    Details: DetailedStockss,
 })
 
 export default AppDrawerNavigator

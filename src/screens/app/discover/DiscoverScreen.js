@@ -12,15 +12,6 @@ import DetailedStockScreen from '../other/detailedStock'
 
 import colors from '../../../assets/colors/theme'
 
-class DiscoverScreen extends Component {
-    render() {
-        return (
-            <AppTopNavigator/>
-        );
-    }
-}
-export default DiscoverScreen;
-
 const StockScreen = {
     screen: DiscoverStockScreen,
     navigationOptions: {}
@@ -47,10 +38,10 @@ const StockScreen = {
       }
   }
 
-  const StockScreenStackNavigator = createStackNavigator({
-    StockScreen,
-    DetailedStock
-  }, stackStyle)
+//   const StockScreenStackNavigator = createStackNavigator({
+//     StockScreen,
+//     DetailedStock
+//   }, stackStyle)
   
   const RouteConfig = {
     swipeEnabled: false,
@@ -83,8 +74,8 @@ const StockScreen = {
     }
   }
   
-const AppTopNavigator = createMaterialTopTabNavigator({
-    Stocks: StockScreenStackNavigator,
+const DiscoverScreen = createMaterialTopTabNavigator({
+    Stocks: StockScreen,
     People: PeopleScreen,
     Groups: GroupsScreen
 }, RouteConfig)
@@ -95,3 +86,5 @@ const styles = StyleSheet.create({
         
     }
 });
+
+export default DiscoverScreen

@@ -83,7 +83,7 @@ class DiscoverStockScreen extends Component {
         return stockCards.map((item, i) => {
                 
                 return(
-                    <Animated.View key={item.id} style={styles.stockCard}>
+                    <Animated.View key={item.id} navigation={this.props.navigation} style={styles.stockCard}>
                         <FeaturedStockCard name={item.stockName} />
                     </Animated.View>
                 )
@@ -115,7 +115,7 @@ class DiscoverStockScreen extends Component {
                     <View style={{flex: 1, backgroundColor: colors.secondary, marginTop: 15}}>
                         <Text style={styles.subheading}>Industries</Text>
                         <View style={styles.industryContainer}>
-                            <TouchableOpacity onPress={() => this.props.navigation.navigate('DetailedStock')} style={[styles.industryCard, styles.industryCardLeft]}>
+                            <TouchableOpacity onPress={() => this.props.navigation.navigate('Details')} style={[styles.industryCard, styles.industryCardLeft]}>
                                 <Text style={styles.industryText}>TING</Text>
                             </TouchableOpacity>
                             <View style={[styles.industryCard, styles.industryCardRight]}>

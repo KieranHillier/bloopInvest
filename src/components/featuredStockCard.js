@@ -10,6 +10,7 @@ import {
 import { AreaChart, Grid, LineChart } from 'react-native-svg-charts'
 import * as shape from 'd3-shape'
 import colors from "../assets/colors/theme";
+import { withNavigation } from 'react-navigation'
 
 const data = [ 50, 10, 40, 95, -4, -24, 85, 91, 35, 53, -53, 24, 50, -20, -80, 50, 10, 40, 95, -4, -24, 85, 91, 35, 53, -53, 24, 50, -20, -80 ]
 var width = Dimensions.get('window').width; //full width
@@ -17,7 +18,7 @@ var height = Dimensions.get('window').height; //full height
 
 const FeaturedStockCard = (props) => (
     
-    <View onPress={() => {}} style={{flex:1}}>
+    <TouchableOpacity onPress={() => props.navigation.navigate('Details', {stockName: props.name})} style={{flex:1}}>
         <View style={{flexDirection: 'row', justifyContent: 'space-between', paddingTop: 5, paddingHorizontal: 10}}>
             <Text style={{fontSize: 39, color: colors.text, fontFamily: 'Roboto'}}>{props.name}</Text>
             <Text style={{fontSize: 39, color: colors.text, }}>$1,042.36</Text>
@@ -47,9 +48,9 @@ const FeaturedStockCard = (props) => (
                 </TouchableOpacity>
             </View>
         </View>     
-    </View>
+    </TouchableOpacity>
     )
-export default FeaturedStockCard;
+export default withNavigation(FeaturedStockCard);
 
 const styles = StyleSheet.create({
     container: {

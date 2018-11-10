@@ -9,7 +9,8 @@ class DetailedStockScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text>DetailedStockScreen</Text>
+                <View style={styles.topNumbers}></View>
+                <View style=></View>
             </View>
         );
     }
