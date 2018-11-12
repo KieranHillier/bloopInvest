@@ -9,6 +9,7 @@ import {
     ViewPagerAndroid
 } from "react-native";
 import colors from "../../../../assets/colors/theme";
+import { Row } from "native-base";
 
 var width = Dimensions.get('window').width; //full width
 var height = Dimensions.get('window').height; //full height
@@ -20,9 +21,22 @@ class DiscoverPeopleScreen extends Component {
                 <ScrollView horizontal={true} pagingEnable={true} contentContainerStyle={{flexDirection: 'row', backgroundColor: 'grey',  }} style={{paddingLeft: width * 0.03, paddingTop: '3%', height: height * 0.30}}>
                     <TouchableOpacity style={styles.profileCard}>
                         <View style={styles.topProfile}>
-                            <View style={{width: 70, height: 70, backgroundColor: 'orange', borderRadius: 50, margin: 10}}></View>
+                            <View style={{flex: 1, backgroundColor: 'orange', borderRadius: 50, margin: 10}}></View>
+                            <View style={{width: '50%', backgroundColor: 'orange',}}>
+                                <View style={{flex:1, justifyContent: 'center', alignItems: 'center'}}>
+                                    <Text style={{fontSize: 23}}>+25.7%</Text>
+                                </View>
+                                <View style={{flexDirection: 'row', height: '32%', justifyContent: 'space-around'}}>
+                                    <Text>200</Text>
+                                    <Text>3000</Text>
+                                </View> 
+                            </View>
+                            
                         </View>
-                        <View style={styles.centerProfile}></View>
+                        <View style={styles.centerProfile}>
+                            <Text>Kieran Hillier</Text>
+                            <Text>Technology</Text>
+                        </View>
                         <View style={styles.bottomProfile}>
                             <TouchableOpacity style={{backgroundColor: '#FFB534', elevation: 2, justifyContent: 'center', alignItems: 'center', width: 80, borderRadius: 8, height: 30}}>
                                 <Text style={{color: colors.main, fontWeight: 'bold', fontSize: 15}}>PH</Text>

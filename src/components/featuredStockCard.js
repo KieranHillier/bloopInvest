@@ -16,22 +16,44 @@ const data = [ 50, 10, 40, 95, -4, -24, 85, 91, 35, 53, -53, 24, 50, -20, -80, 5
 var width = Dimensions.get('window').width; //full width
 var height = Dimensions.get('window').height; //full height
 
+
 const FeaturedStockCard = (props) => (
     
-    <TouchableOpacity activeOpacity={1} onPress={() => props.navigation.navigate('Details', {stockName: props.name})} style={{flex:1}}>
+    //ERROR WITH THIS RN
+    // const dataPassdown = {
+    //     stockName: props.stockName,
+    //     price: props.price,
+    //     difference: props.difference,
+    //     differencePercentage: props.differencePercentage,
+    //     market: props.market,
+    //     companyName: props.companyName,
+    //     data: props.data,
+    //     time: props.time
+    // }
+
+    <TouchableOpacity activeOpacity={1} onPress={() => props.navigation.navigate('Details', {
+        stockName: props.name,
+        price: props.price,
+        difference: props.difference,
+        differencePercentage: props.differencePercentage,
+        market: props.market,
+        companyName: props.companyName,
+        data: props.data,
+        time: props.time
+    })} style={{flex:1}}>
         <View style={{flexDirection: 'row', justifyContent: 'space-between', paddingTop: 5, paddingHorizontal: 10}}>
             <Text style={{fontSize: 39, color: colors.text, fontFamily: 'Roboto'}}>{props.name}</Text>
-            <Text style={{fontSize: 39, color: colors.text, }}>$1,042.36</Text>
+            <Text style={{fontSize: 39, color: colors.text, }}>{`$${props.price}`}</Text>
 
         </View>
         <View style={{flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 14}}>
-            <Text style={{fontSize: 12, fontWeight: '500', color: colors.text, lineHeight: 12, fontFamily: 'Roboto'}}>NASDAQ: <Text style={{fontSize: 12, fontWeight: '200'}}>Alphabet Inc.</Text></Text>
-            <Text style={{fontSize: 17, fontWeight: '500', color: '#61D943', lineHeight: 18}}>15.6 (2.1%)</Text>
+            <Text style={{fontSize: 12, fontWeight: '500', color: colors.text, lineHeight: 12, fontFamily: 'Roboto'}}>{`${props.market} `}<Text style={{fontSize: 12, fontWeight: '200'}}>{props.companyName}</Text></Text>
+            <Text style={{fontSize: 17, fontWeight: '500', color: '#61D943', lineHeight: 18}}>{`${props.difference} (${props.differencePercentage}%)`}</Text>
         </View>
         <View style={{flex: 1, backgroundColor: 'white', paddingHorizontal: 11}}>
             <LineChart
                 style={{ height: '100%' }}
-                data={ data }
+                data={ props.data }
                 svg={{ stroke: '#61D943', strokeWidth: 3 }}
                 contentInset={{ top: 20, bottom: 20 }}
                 >
