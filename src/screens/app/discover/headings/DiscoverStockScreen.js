@@ -19,6 +19,8 @@ import { AreaChart, Grid, LineChart } from 'react-native-svg-charts'
 import * as shape from 'd3-shape'
 import FeaturedStockCard from '../../../../components/featuredStockCard'
 import IndustryContainer from '../../../../components/industryContainer'
+import firebase from 'react-native-firebase';
+
 
 var width = Dimensions.get('window').width; //full width
 var height = Dimensions.get('window').height; //full height
@@ -88,15 +90,32 @@ class DiscoverStockScreen extends Component {
             currentIndex: 0,
             refreshing: false,
             active: '#000000',
+            featuredStocks: '',
         }
+        this.ref = firebase.firestore().collection('stocks')
+
     }
 
     componentWillMount() {
 
+        this.ref.doc('MSFT').get().then((doc) => {
+            if (doc.exists) {
+                console.log(doc.data().closingPrice)
+                this.setState({
+                    featuredStocks: doc.data().closingPrice
+                })
+            } else {
+                console.log('No data');
+            }
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+        
     }
 
     detailsPage = () => {
-        this.props.navigation.navigate('People')
+        this.props.navigation.navigate('People');
     }
 
     // onRefresh = () => {
